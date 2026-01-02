@@ -1,55 +1,50 @@
 *{
-  margin: 0;
+  margin:0;
   padding:0;
   box-sizing: border-box;
 }
 
-/* Full layout */
 .admin-layout {
   display: flex;
-  height: 100vh; /* full viewport height */
+  min-height: 100vh; /* full viewport height */
+  background: #f0fdf4; /* light green background */
 }
 
 /* Sidebar */
 .sidebar {
-  width: 240px;
-  background-color: #1f2937;
+  min-width: 220px;
+  background: #374151; /* dark green */
   color: white;
   padding: 20px;
-
   display: flex;
   flex-direction: column;
-
-  /* make it independent scrollable */
-  overflow-y: auto;
+  gap: 15px;
+  position: sticky;
+  top: 0;
+  height: 100vh; /* full height for sticky */
 }
 
-/* Sidebar header */
 .sidebar h2 {
   margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-/* Sidebar links */
 .sidebar a {
-  display: block;
-  color: #d1d5db;
+  color: white;
   text-decoration: none;
-  margin: 10px 0;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
 }
 
 .sidebar a:hover {
-  background-color: #374151;
-  color: white;
+  background: #22c55e; /* lighter green hover */
 }
 
-/* Main content */
+/* Main content area */
 .content {
-  flex: 1;             /* take remaining space */
+  flex-grow: 1; /* ✅ take remaining space */
   padding: 20px;
-  background-color: #f9fafb;
-
-  /* scroll independently */
-  overflow-y: auto;
+  background: #f0fdf4; /* match theme */
+  overflow-y: auto; /* scroll if content is tall */
 }
