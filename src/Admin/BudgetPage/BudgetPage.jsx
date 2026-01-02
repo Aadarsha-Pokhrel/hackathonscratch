@@ -32,7 +32,7 @@ export function BudgetPage() {
         </div>
       </div>
 
-      <h2 className="section-title">Loans Taken</h2>
+      <h2 className="section-title">Active Loans Taken</h2>
       <div className="loan-list">
         {loans.map((loan) => (
           <div key={loan.id} className="loan-card">

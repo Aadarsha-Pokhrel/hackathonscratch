@@ -3,6 +3,7 @@ import { AdminPage } from './Admin/AdminPage'
 import { AdminDashboard } from './Admin/AdminDashBoard'
 import { NoticePage } from './Admin/AdminNotice/NoticePage'
 import { BudgetPage } from './Admin/BudgetPage/BudgetPage'
+import { LoanRequestPage } from './Admin/LoanRequest/LoanRequestPage'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route index element={<AdminDashboard />} />
         <Route path="notice" element={<NoticePage />} />
         <Route path="budget" element={<BudgetPage />} />
+        <Route path="loanRequest" element={<LoanRequestPage />} />
       </Route>
     </Routes>
   )
