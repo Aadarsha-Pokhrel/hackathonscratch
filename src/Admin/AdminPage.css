@@ -1,0 +1,55 @@
+*{
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+/* Full layout */
+.admin-layout {
+  display: flex;
+  height: 100vh; /* full viewport height */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: #1f2937;
+  color: white;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  /* make it independent scrollable */
+  overflow-y: auto;
+}
+
+/* Sidebar header */
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: #d1d5db;
+  text-decoration: none;
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.sidebar a:hover {
+  background-color: #374151;
+  color: white;
+}
+
+/* Main content */
+.content {
+  flex: 1;             /* take remaining space */
+  padding: 20px;
+  background-color: #f9fafb;
+
+  /* scroll independently */
+  overflow-y: auto;
+}
