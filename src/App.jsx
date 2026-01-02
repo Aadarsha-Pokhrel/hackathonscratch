@@ -15,7 +15,6 @@ function App() {
         <Route path="budget" element={<BudgetPage />} />
         <Route path="loanRequest" element={<LoanRequestPage />} />
         <Route path="membersdetails" element={<MembersPage />} />
-
       </Route>
     </Routes>
   )

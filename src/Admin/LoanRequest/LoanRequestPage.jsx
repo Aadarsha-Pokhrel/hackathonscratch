@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { loanRequests as initialRequests, loanHistory as initialHistory } from "./loans.js";
+import { loanRequests as initialRequests, loanHistory as initialHistory ,loans as initialLoan} from "./loans.js";
 import "./LoanRequestPage.css";
 
 export function LoanRequestPage() {
   const [requests, setRequests] = useState(initialRequests);
   const [history, setHistory] = useState(initialHistory);
+  const [loans,setLoan] = useState(initialLoan);
 
   // Sort state
   const [requestSort, setRequestSort] = useState("latest");
@@ -18,13 +19,25 @@ export function LoanRequestPage() {
     return `${Math.floor(diff / 86400)}d ago`;
   }
 
-  function handleAction(id, action) {
-    const updatedRequest = requests.find(r => r.id === id);
-    updatedRequest.status = action;
+  function handleAction(r, action) {
+  const updatedRequest = { ...r, status: action };
 
-    setHistory([updatedRequest, ...history]);
-    setRequests(requests.filter(r => r.id !== id));
+  if (action === "approved") {
+    setLoan(prevLoans => [
+      {
+        id: r.id,
+        name: r.name,
+        amount: r.amount,
+        dateTaken: r.dateRequested,
+      },
+      ...prevLoans,
+    ]);
   }
+
+  setHistory(prev => [updatedRequest, ...prev]);
+  setRequests(prev => prev.filter(request => request.id !== r.id));
+}
+
 
   function markAsPaid(id) {
     setHistory(history.map(r => r.id === id ? { ...r, status: "paid" } : r));
@@ -69,12 +82,23 @@ export function LoanRequestPage() {
             <p className="loan-amount">₹ {r.amount}</p>
             <p className="loan-time">{timeAgo(r.dateRequested)}</p>
             <div className="loan-actions">
-              <button className="accept" onClick={() => handleAction(r.id, "approved")}>Accept</button>
-              <button className="reject" onClick={() => handleAction(r.id, "rejected")}>Reject</button>
+              <button className="accept" onClick={() => handleAction(r, "approved")}>Accept</button>
+              <button className="reject" onClick={() => handleAction(r, "rejected")}>Reject</button>
             </div>
           </div>
         ))}
       </section>
+
+      <h2 className="section-title">Active Loans Taken</h2>
+      <div className="loan-list">
+        {loans.map((loan) => (
+          <div key={loan.id} className="loan-card">
+            <p className="loan-name">{loan.name}</p>
+            <p className="loan-amount">₹ {loan.amount}</p>
+            <p className="loan-time">{timeAgo(loan.dateTaken)}</p>
+          </div>
+        ))}
+      </div>  
 
       {/* Loan History */}
       <section className="history-section">
