@@ -11,6 +11,7 @@ export function AdminPage() {
         <Link to="notice">Notice</Link>
         <Link to="budget">Budget</Link>
         <Link to="loanRequest">Loan Request</Link>
+        <Link to="membersdetails">Members Details</Link>
       </aside>
 
       <main className="content">

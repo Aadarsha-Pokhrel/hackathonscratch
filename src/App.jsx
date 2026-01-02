@@ -4,6 +4,7 @@ import { AdminDashboard } from './Admin/AdminDashBoard'
 import { NoticePage } from './Admin/AdminNotice/NoticePage'
 import { BudgetPage } from './Admin/BudgetPage/BudgetPage'
 import { LoanRequestPage } from './Admin/LoanRequest/LoanRequestPage'
+import { MembersPage } from './Admin/Members/MembersPage'
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
         <Route path="notice" element={<NoticePage />} />
         <Route path="budget" element={<BudgetPage />} />
         <Route path="loanRequest" element={<LoanRequestPage />} />
+        <Route path="membersdetails" element={<MembersPage />} />
+
       </Route>
     </Routes>
   )
