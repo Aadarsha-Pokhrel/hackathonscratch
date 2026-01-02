@@ -40,7 +40,7 @@
 .search-input {
   flex: 1;
   min-width: 200px;
-  padding: 7px 12px;
+  padding: 10px 15px;
   border-radius: 10px;
   border: 1px solid #16a34a;
   font-size: 1rem;
@@ -61,7 +61,7 @@
 }
 
 .sort-section select {
-  padding: 5px 10px;
+  padding: 10px 10px;
   border-radius: 10px;
   border: 1px solid #16a34a;
   font-weight: 600;
