@@ -1,36 +1,42 @@
-import { useState } from 'react'
-import { notices as initialNotices } from './notices.js'
+import { useState,useEffect} from 'react'
+import axios from 'axios'
 import './NoticePage.css'
 
-export function NoticePage() {
-  const [notices, setNotices] = useState(
-    initialNotices.map((n) => ({
-      ...n,
-      createdAt: new Date(),
-    }))
-  )
+export  function NoticePage() {
+
+  const [notices, setNotices] = useState([])
+
+  // Fetch notices from backend (mock or real)
+  useEffect(() => {
+    const fetchNotice = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/notice/1');
+        setNotices(response.data)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchNotice();
+  }, [notices]); 
+
+
+  
   const [text, setText] = useState('')
 
-  function addNotice() {
+  async function addNotice() {
     if (!text.trim()) return
 
     const newNotice = {
-      id: Date.now(),
-      description: text,
-      createdAt: new Date(),
+      "type":"general",
+      "purpose": text,
     }
 
-    setNotices([newNotice, ...notices])
+    await axios.post('http://localhost:8080/create-notice',newNotice);
+
+
     setText('')
   }
 
-  function timeAgo(date) {
-    const diff = (new Date() - date) / 1000
-    if (diff < 60) return `${Math.floor(diff)}s ago`
-    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
-    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
-    return `${Math.floor(diff / 86400)}d ago`
-  }
 
   return (
     <div className="notice-page">
@@ -56,15 +62,14 @@ export function NoticePage() {
           <div key={notice.id} className="notice-card">
             <div className="notice-header">
               <div className="notice-avatar">
-                {notice.description.charAt(0).toUpperCase()}
+                {notice.purpose.charAt(0).toUpperCase()}
               </div>
               <div className="notice-meta">
                 <p className="notice-author">Admin</p>
-                <p className="notice-time">{timeAgo(notice.createdAt)}</p>
               </div>
             </div>
 
-            <div className="notice-content">{notice.description}</div>
+            <div className="notice-content">{notice.purpose}</div>
           </div>
         ))}
       </div>
